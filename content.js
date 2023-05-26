@@ -1,7 +1,6 @@
 /* Looks through all styleSheets on the document and only returns rules 
    that applies to elements on the page. If the rule is a media query it will inspect
    the rules inside that query and only keep the ones that match elements on the page
-   Also preserves all css variable rules
 */
 function getUsedCSSRules() {
     let usedRules = [];
@@ -32,8 +31,7 @@ function getUsedCSSRules() {
             } else {
                 // Handle regular rules
                 let matches = document.querySelectorAll(rule.selectorText);
-
-                if (matches.length || rule.cssText.startsWith("@") || rule.cssText.startsWith("--")) {
+                if (matches.length || rule.cssText.startsWith("@")) {
                     usedRules.push(rule.cssText);
                 }
             }
